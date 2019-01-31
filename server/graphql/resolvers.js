@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 exports.users = async (args, req) => {
-  // if (!req.user) throw new Error('Not authorized')
+  if (!req.user) throw new Error('Not authorized')
   
   try {
     return await User.find()
@@ -55,9 +55,13 @@ exports.login = async ({ input }) => {
     if (!validPassword) throw new Error('Invalid password')
 
     // Convert user object to json
-    const userJSON = user.toJSON()
+    let userJSON = user.toJSON()
 
-    delete userJSON.password
+    userJSON = {
+      _id: userJSON._id,
+      name: userJSON.name,
+      email: userJSON.email
+    }
 
     // Create json web token
     const token = jwt.sign(userJSON, process.env.JWT_SECRET, { expiresIn: '1d' })

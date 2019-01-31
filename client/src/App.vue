@@ -7,7 +7,8 @@
         <code v-text="'<el-button>'"></code>
         below
       </p>
-      <el-button @click="login">el-button</el-button>
+      <el-button @click="fetchUsers">Fetch Users</el-button>
+      <el-button @click="login">Login</el-button>
     </div>
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
@@ -15,6 +16,7 @@
 
 <script>
 import auth from '@/api/auth'
+import { mapActions } from 'vuex'
 
 import HelloWorld from './components/HelloWorld.vue'
 
@@ -29,6 +31,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['setToken']),
     async fetchUsers () {
       try {
         const res = await auth.users()
@@ -43,7 +46,8 @@ export default {
 
       try {
         const res = await auth.login(email, password)
-        console.log(res.data.data.login)
+        const { token } = res.data.data.login
+        this.setToken(token)
       } catch (error) {
         console.error(error)
       }
