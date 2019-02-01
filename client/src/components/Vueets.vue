@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-loading="loadingVueets">
     <article v-for="vueet in vueets" :key="vueet._id" class="vueet">
       <p>{{ vueet.author.name }}</p>
       <p>{{ vueet.content }}</p>
@@ -8,18 +8,18 @@
 </template>
 
 <script>
-import vueet from '@/api/vueet'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'vueets',
-  data () {
-    return {
-      vueets: []
-    }
+  methods: {
+    ...mapActions(['fetchVueets'])
   },
-  async mounted () {
-    const res = await vueet.index()
-    this.vueets = res.data.data.vueets
+  computed: {
+    ...mapGetters(['loadingVueets', 'vueets'])
+  },
+  mounted () {
+    this.fetchVueets()
   }
 }
 </script>

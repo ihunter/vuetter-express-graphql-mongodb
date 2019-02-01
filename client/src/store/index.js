@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
+import vueets from './modules/vueets'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -17,15 +19,6 @@ export default new Vuex.Store({
     user (state) {
       return state.user
     }
-    // userVueetCount (state) {
-    //   return state.user.vueets.length
-    // },
-    // userFollowingCount (state) {
-    //   return state.user.following.length
-    // },
-    // userFollowersCount (state) {
-    //   return state.user.followers.length
-    // }
   },
   mutations: {
     setToken (state, token) {
@@ -42,5 +35,8 @@ export default new Vuex.Store({
     setUser ({ commit }, user) {
       commit('setUser', user)
     }
+  },
+  modules: {
+    vueets
   }
 })
