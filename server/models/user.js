@@ -15,10 +15,28 @@ const userSchema = new Schema(
       type: String,
       required: true
     },
-    vueet: [
+    vueets: [
       {
         type: Schema.Types.ObjectId,
         ref: 'Vueet'
+      }
+    ],
+    likedVueets: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Vueet'
+      }
+    ],
+    following: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+      }
+    ],
+    followers: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
       }
     ]
   },

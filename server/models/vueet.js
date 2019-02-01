@@ -7,7 +7,11 @@ const vueetSchema = new Schema(
       type: String,
       required: true
     },
-    creator: {
+    likes: {
+      type: Number,
+      default: 0
+    },
+    author: {
       type: Schema.Types.ObjectId,
       ref: 'User',
       required: true
