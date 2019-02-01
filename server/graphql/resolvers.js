@@ -65,6 +65,7 @@ exports.login = async ({ input }) => {
     // Convert user object to json
     let userJSON = user.toJSON()
     
+    // Remove sensitive information from user object to be stored in JWT
     userJSON = {
       _id: userJSON._id,
       name: userJSON.name,
@@ -76,7 +77,7 @@ exports.login = async ({ input }) => {
     
     return {
       token,
-      user: userJSON
+      user
     }
   } catch (error) {
     throw new Error('Failed to login user')

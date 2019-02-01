@@ -1,12 +1,12 @@
 <template>
-  <el-row :gutter="20">
-    <el-col :span="6" class="hidden-sm-and-down">
-      <div class="grid-content bg-purple"></div>
+  <el-row :gutter="20" type="flex" justify="center">
+    <el-col :sm="9" :lg="6" :xl="4" class="hidden-xs-only">
+      <ProfileCard />
     </el-col>
-    <el-col :sm="24" :md="12">
-      <div class="grid-content bg-purple"></div>
+    <el-col :xs="24" :sm="15" :lg="12" :xl="6">
+      <Vueets />
     </el-col>
-    <el-col :span="6" class="hidden-sm-and-down">
+    <el-col :lg="6" :xl="4" class="hidden-md-and-down">
       <div class="grid-content bg-purple"></div>
     </el-col>
   </el-row>
@@ -14,11 +14,15 @@
 
 <script>
 export default {
-  name: 'home'
+  name: 'home',
+  components: {
+    Vueets: () => import('@/components/Vueets'),
+    ProfileCard: () => import('@/components/ProfileCard')
+  }
 }
 </script>
 
-<style>
+<style scoped>
   .el-row {
     margin-bottom: 20px;
   }

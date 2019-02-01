@@ -1,6 +1,12 @@
 <template>
   <el-container>
-    <el-header></el-header>
+    <el-header>
+      <el-menu mode="horizontal" :router="true">
+        <el-menu-item index="1" :route="{ name: 'home' }">Home</el-menu-item>
+        <el-menu-item index="2" :route="{ name: 'login' }">Login</el-menu-item>
+        <el-menu-item index="3">Home</el-menu-item>
+      </el-menu>
+    </el-header>
 
     <el-main>
       <router-view></router-view>
@@ -9,39 +15,8 @@
 </template>
 
 <script>
-import auth from '@/api/auth'
-import { mapActions } from 'vuex'
-
 export default {
-  name: 'app',
-  data () {
-    return {
-      users: []
-    }
-  },
-  methods: {
-    ...mapActions(['setToken']),
-    async fetchUsers () {
-      try {
-        const res = await auth.users()
-        this.users = res.data.data.users
-      } catch (error) {
-        console.error(error)
-      }
-    },
-    async login () {
-      const email = 'ijh.hunter@gmail.com'
-      const password = 'asdfasdf'
-
-      try {
-        const res = await auth.login(email, password)
-        const { token } = res.data.data.login
-        this.setToken(token)
-      } catch (error) {
-        console.error(error)
-      }
-    }
-  }
+  name: 'app'
 }
 </script>
 
