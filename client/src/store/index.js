@@ -2,7 +2,10 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
+import auth from '@/api/auth'
+
 import vueets from './modules/vueets'
+import error from './modules/error'
 
 Vue.use(Vuex)
 
@@ -10,7 +13,8 @@ export default new Vuex.Store({
   plugins: [createPersistedState()],
   state: {
     token: null,
-    user: null
+    user: null,
+    loadingUser: false
   },
   getters: {
     token (state) {
@@ -18,6 +22,9 @@ export default new Vuex.Store({
     },
     user (state) {
       return state.user
+    },
+    loadingUser (state) {
+      return state.loadingUser
     }
   },
   mutations: {
@@ -26,17 +33,30 @@ export default new Vuex.Store({
     },
     setUser (state, user) {
       state.user = user
+    },
+    setLoadingUser (state, loading) {
+      state.loadingUser = loading
     }
   },
   actions: {
-    setToken ({ commit }, token) {
-      commit('setToken', token)
-    },
-    setUser ({ commit }, user) {
-      commit('setUser', user)
+    async login ({ commit }, payload) {
+      try {
+        commit('setLoadingUser', true)
+        const res = await auth.login(payload)
+        const { token, user } = res.data.data.login
+        commit('setUser', user)
+        commit('setToken', token)
+      } catch (error) {
+        error.message = 'Failed to login'
+        console.error(error)
+        commit('setError', error)
+      } finally {
+        commit('setLoadingUser', false)
+      }
     }
   },
   modules: {
-    vueets
+    vueets,
+    error
   }
 })

@@ -5,6 +5,8 @@ const vueetSchema = new Schema(
   {
     content: {
       type: String,
+      minlength: 1,
+      maxlength: 280,
       required: true
     },
     likes: {

@@ -1,5 +1,5 @@
 <template>
-  <el-card :body-style="{ padding: 0 }">
+  <el-card :body-style="{ padding: 0 }" v-loading="loadingUser">
     <img src="https://via.placeholder.com/350x150" alt="placeholder" class="image">
 
     <el-row>
@@ -42,8 +42,11 @@
 <script>
 import { mapGetters } from 'vuex'
 
+import mixin from '@/mixins/loading'
+
 export default {
   name: 'profile-card',
+  mixins: [mixin],
   computed: {
     ...mapGetters(['user'])
   }

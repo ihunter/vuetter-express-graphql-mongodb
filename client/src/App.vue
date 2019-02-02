@@ -5,18 +5,31 @@
         <el-menu-item index="1" :route="{ name: 'home' }">Home</el-menu-item>
         <el-menu-item index="2" :route="{ name: 'login' }">Login</el-menu-item>
         <el-menu-item index="3">Home</el-menu-item>
+        <el-button type="primary" @click="dialogVueet = true" round>Primary</el-button>
       </el-menu>
     </el-header>
 
     <el-main>
       <router-view></router-view>
     </el-main>
+
+    <VueetDialog @close="dialogVueet = false" :show="dialogVueet" />
   </el-container>
 </template>
 
 <script>
+import VueetDialog from '@/components/VueetDialog'
+
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    VueetDialog
+  },
+  data () {
+    return {
+      dialogVueet: false
+    }
+  }
 }
 </script>
 

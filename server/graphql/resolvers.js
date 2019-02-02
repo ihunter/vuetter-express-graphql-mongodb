@@ -14,7 +14,7 @@ exports.vueets = async (args, req) => {
   try {
     const { following } = await User.findById(userId)
 
-    return await Vueet.find({ author: { $in: following } }).populate('author')
+    return await Vueet.find({ author: { $in: following } }).populate('author').sort({ createdAt: -1 })
   } catch (error) {
     throw new Error('Failed to fetch vueets')
   }

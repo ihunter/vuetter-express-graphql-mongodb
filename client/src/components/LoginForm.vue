@@ -9,7 +9,7 @@
     </el-form-item>
 
     <el-form-item>
-      <el-button @click="login" type="primary">Login</el-button>
+      <el-button @click="submit" type="primary" :loading="loadingUser">Login</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -17,10 +17,11 @@
 <script>
 import { mapActions } from 'vuex'
 
-import auth from '@/api/auth'
+import mixin from '@/mixins/loading'
 
 export default {
   name: 'login-form',
+  mixins: [mixin],
   data () {
     return {
       form: {
@@ -30,17 +31,9 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['setToken', 'setUser']),
-    async login () {
-      try {
-        const res = await auth.login(this.form)
-        const { token, user } = res.data.data.login
-        console.log(user)
-        this.setUser(user)
-        this.setToken(token)
-      } catch (error) {
-        console.error(error)
-      }
+    ...mapActions(['login']),
+    submit () {
+      this.login(this.form)
     }
   }
 }

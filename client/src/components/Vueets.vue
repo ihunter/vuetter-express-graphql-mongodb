@@ -10,13 +10,16 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 
+import mixin from '@/mixins/loading'
+
 export default {
   name: 'vueets',
+  mixins: [mixin],
   methods: {
     ...mapActions(['fetchVueets'])
   },
   computed: {
-    ...mapGetters(['loadingVueets', 'vueets'])
+    ...mapGetters(['vueets'])
   },
   mounted () {
     this.fetchVueets()

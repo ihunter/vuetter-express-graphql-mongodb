@@ -13,8 +13,11 @@
 </template>
 
 <script>
+import errorMixin from '@/mixins/error'
+
 export default {
   name: 'home',
+  mixins: [errorMixin],
   components: {
     Vueets: () => import('@/components/Vueets'),
     ProfileCard: () => import('@/components/ProfileCard')
