@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import router from '@/routes'
 import createPersistedState from 'vuex-persistedstate'
 
 import auth from '@/api/auth'
@@ -46,8 +47,23 @@ export default new Vuex.Store({
         const { token, user } = res.data.data.login
         commit('setUser', user)
         commit('setToken', token)
+        router.push({ name: 'home' })
       } catch (error) {
         error.message = 'Failed to login'
+        console.error(error)
+        commit('setError', error)
+      } finally {
+        commit('setLoadingUser', false)
+      }
+    },
+    async logout ({ commit }) {
+      try {
+        commit('setLoadingUser', true)
+        commit('setToken', null)
+        commit('setUser', null)
+        router.push({ name: 'login' })
+      } catch (error) {
+        error.message = 'Failed to logout'
         console.error(error)
         commit('setError', error)
       } finally {

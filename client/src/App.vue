@@ -4,7 +4,7 @@
       <el-menu mode="horizontal" :router="true">
         <el-menu-item index="1" :route="{ name: 'home' }">Home</el-menu-item>
         <el-menu-item index="2" :route="{ name: 'login' }">Login</el-menu-item>
-        <el-menu-item index="3">Home</el-menu-item>
+        <el-button type="primary" @click="logout" round>Logout</el-button>
         <el-button type="primary" @click="dialogVueet = true" round>Primary</el-button>
       </el-menu>
     </el-header>
@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 import VueetDialog from '@/components/VueetDialog'
 
 export default {
@@ -29,6 +31,9 @@ export default {
     return {
       dialogVueet: false
     }
+  },
+  methods: {
+    ...mapActions(['logout'])
   }
 }
 </script>
