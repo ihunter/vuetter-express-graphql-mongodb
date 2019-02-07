@@ -1,42 +1,4 @@
 <template>
-  <el-card :body-style="{ padding: 0 }" v-loading="loadingUser">
-    <img src="https://via.placeholder.com/350x150" alt="placeholder" class="image">
-
-    <el-row>
-      <el-col>
-        <span class="name">{{ user.name }}</span>
-      </el-col>
-    </el-row>
-
-    <el-row class="content">
-      <el-col :span="8">
-        <div>
-          Vueets
-        </div>
-        <div>
-          {{ user.vueets.length }}
-        </div>
-      </el-col>
-
-      <el-col :span="8">
-        <div>
-          Following
-        </div>
-        <div>
-          {{ user.following.length }}
-        </div>
-      </el-col>
-
-      <el-col :span="8">
-        <div>
-          Followers
-        </div>
-        <div>
-          {{ user.followers.length }}
-        </div>
-      </el-col>
-    </el-row>
-  </el-card>
 </template>
 
 <script>

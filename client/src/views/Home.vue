@@ -1,15 +1,4 @@
 <template>
-  <el-row :gutter="20" type="flex" justify="center">
-    <el-col :sm="9" :lg="6" :xl="4" class="hidden-xs-only">
-      <ProfileCard />
-    </el-col>
-    <el-col :xs="24" :sm="15" :lg="12" :xl="6">
-      <Vueets />
-    </el-col>
-    <el-col :lg="6" :xl="4" class="hidden-md-and-down">
-      <div class="grid-content bg-purple"></div>
-    </el-col>
-  </el-row>
 </template>
 
 <script>

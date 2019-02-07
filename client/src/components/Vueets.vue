@@ -1,10 +1,4 @@
 <template>
-  <div v-loading="loadingVueets">
-    <article v-for="vueet in vueets" :key="vueet._id" class="vueet">
-      <p>{{ vueet.author.name }}</p>
-      <p>{{ vueet.content }}</p>
-    </article>
-  </div>
 </template>
 
 <script>
