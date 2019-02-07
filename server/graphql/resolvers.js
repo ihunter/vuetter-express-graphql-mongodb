@@ -5,6 +5,10 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const Vueet = require('../models/vueet');
 
+const { PubSub } = require('graphql-subscriptions')
+
+const pubsub = new PubSub()
+
 exports.vueets = async (args, req) => {
   // Check if user is logged in
   if (!req.user) throw new Error('Not authorized')
@@ -126,6 +130,8 @@ exports.createVueet = async ({ input }, req) => {
     author.vueets.push(vueet)
     await author.save()
 
+    pubsub.publish(SOMETHING_CHANGED_TOPIC, vueet._doc)
+
     // Return graphql Vueet object
     return {
       ...vueet._doc
@@ -133,4 +139,13 @@ exports.createVueet = async ({ input }, req) => {
   } catch (error) {
     throw new Error('Failed to create vueet')
   }
+}
+
+const SOMETHING_CHANGED_TOPIC = 'something_changed'
+exports.somethingChanged = {
+  subscribe: () => pubsub.asyncIterator(SOMETHING_CHANGED_TOPIC)
+}
+
+exports.hello = () => {
+  return 'Hello world!'
 }

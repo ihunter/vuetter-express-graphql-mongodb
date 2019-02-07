@@ -6,8 +6,11 @@ const bodyParser = require('body-parser')
 const graphqlHTTP = require('express-graphql')
 const mongoose = require('mongoose')
 
-const graphqlSchema = require('./graphql/schema')
-const graphqlRoot = require('./graphql/resolvers')
+const schema = require('./graphql/schema')
+const rootValue = require('./graphql/resolvers')
+
+const { SubscriptionServer } = require('subscriptions-transport-ws')
+const { execute, subscribe } = require('graphql')
 
 const isAuth = require('./middleware/isAuth')
 
@@ -22,8 +25,8 @@ app.use(bodyParser.json())
 app.use(isAuth)
 
 app.use('/graphql', graphqlHTTP({
-  schema: graphqlSchema,
-  rootValue: graphqlRoot,
+  schema,
+  rootValue,
   graphiql: true
 }))
 
@@ -41,7 +44,18 @@ const options = {
 
 mongoose.connect(uris, options)
   .then(() => {
-    app.listen(process.env.PORT)
+    return app.listen(process.env.PORT)
+  })
+  .then(server => {
+    SubscriptionServer.create({
+      schema,
+      execute,
+      subscribe
+    },
+    {
+      server: server,
+      path: '/graphql'
+    })
   })
   .catch(err => {
     console.error(err)

@@ -1,6 +1,10 @@
 const { buildSchema } = require('graphql')
 
 module.exports = buildSchema(`
+  type Result {
+    id: String
+  }
+
   type User {
     _id: ID!
     name: String!
@@ -48,6 +52,7 @@ module.exports = buildSchema(`
   }
   
   type Query {
+    hello: String
     users: [User!]!
     vueets: [Vueet!]!
     login(input: LoginInput!): AuthData!
@@ -57,5 +62,15 @@ module.exports = buildSchema(`
     createUser(input: UserInput): User!
     createVueet(input: VueetInput): Vueet!
     follow(input: FollowInput): User!
+  }
+
+  type Subscription {
+    somethingChanged: Result
+  }
+
+  schema {
+    query: Query
+    mutation: Mutation
+    subscription: Subscription
   }
 `)

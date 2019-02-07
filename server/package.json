@@ -18,10 +18,12 @@
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
     "graphql": "^14.1.1",
+    "graphql-subscriptions": "^1.0.0",
     "jsonwebtoken": "^8.4.0",
     "mongoose": "^5.4.7",
     "passport": "^0.4.0",
-    "passport-jwt": "^4.0.0"
+    "passport-jwt": "^4.0.0",
+    "subscriptions-transport-ws": "^0.9.15"
   },
   "devDependencies": {
     "nodemon": "^1.18.9"

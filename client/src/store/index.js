@@ -31,6 +31,9 @@ export default new Vuex.Store({
   mutations: {
     setToken (state, token) {
       state.token = token
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('apollo-token', token)
+      }
     },
     setUser (state, user) {
       state.user = user
