@@ -24,14 +24,13 @@ app.use(isAuth)
 app.use('/graphql', graphqlHTTP({
   schema: graphqlSchema,
   rootValue: graphqlRoot,
-  graphiql: true
+  graphiql: true,
+  formatError(err) {
+    return {
+      message: err.message
+    }
+  }
 }))
-
-app.get('/test', isAuth, (req, res, next) => {
-  return res.json({
-    message: 'Hey'
-  })
-})
 
 const uris = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}?retryWrites=true`
 

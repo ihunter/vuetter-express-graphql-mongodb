@@ -9,6 +9,7 @@ export default {
   },
   mutations: {
     setError (state, error) {
+      console.log(error)
       state.error = error
     }
   }

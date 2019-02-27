@@ -1,14 +1,24 @@
 <template>
+  <div>
+    <article class="vueet" v-for="vueet in vueets" :key="vueet.id">
+      <div>
+      {{ vueet.author.name }}
+      </div>
+      <div>
+      {{ vueet.content }}
+      </div>
+    </article>
+  </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
 
-import mixin from '@/mixins/loading'
+import loading from '@/mixins/loading'
 
 export default {
   name: 'vueets',
-  mixins: [mixin],
+  mixins: [loading],
   methods: {
     ...mapActions(['fetchVueets'])
   },

@@ -49,7 +49,6 @@ export default new Vuex.Store({
         commit('setToken', token)
         router.push({ name: 'home' })
       } catch (error) {
-        error.message = 'Failed to login'
         console.error(error)
         commit('setError', error)
       } finally {
@@ -63,7 +62,6 @@ export default new Vuex.Store({
         commit('setUser', null)
         router.push({ name: 'login' })
       } catch (error) {
-        error.message = 'Failed to logout'
         console.error(error)
         commit('setError', error)
       } finally {

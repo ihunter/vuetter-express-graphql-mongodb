@@ -1,15 +1,10 @@
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
+  methods: {
+    ...mapMutations(['setError'])
+  },
   computed: {
     ...mapGetters(['error'])
-  },
-  watch: {
-    error (newValue) {
-      this.$notify.error({
-        title: 'Error',
-        message: `${newValue}`
-      })
-    }
   }
 }

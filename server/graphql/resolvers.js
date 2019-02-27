@@ -49,7 +49,7 @@ exports.follow = async ({ input }, req) => {
 
 exports.login = async ({ input }) => {
   const { email, password } = input
-  
+
   try {
     // Find user by email
     const user = await User.findOne({ email })
@@ -80,7 +80,7 @@ exports.login = async ({ input }) => {
       user
     }
   } catch (error) {
-    throw new Error('Failed to login user')
+    throw error
   }
 }
 

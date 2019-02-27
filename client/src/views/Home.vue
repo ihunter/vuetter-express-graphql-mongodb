@@ -1,4 +1,17 @@
 <template>
+  <v-container>
+    <v-layout justify-center>
+      <div class="profile-card">
+        <ProfileCard />
+      </div>
+    
+      <div class="vueets">
+        <Vueets />
+      </div>
+      
+      <div class="asdf"></div>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -15,27 +28,23 @@ export default {
 </script>
 
 <style scoped>
-  .el-row {
-    margin-bottom: 20px;
-  }
-  .el-col {
-    border-radius: 4px;
-  }
-  .bg-purple-dark {
-    background: #99a9bf;
-  }
-  .bg-purple {
-    background: #d3dce6;
-  }
-  .bg-purple-light {
-    background: #e5e9f2;
-  }
-  .grid-content {
-    border-radius: 4px;
-    min-height: 36px;
-  }
-  .row-bg {
-    padding: 10px 0;
-    background-color: #f9fafc;
-  }
+.profile-card {
+  width: 300px;
+  min-height: 200px;
+  background: #8435ce;
+}
+
+.vueets {
+  width: 600px;
+  min-height: 1000px;
+  padding: 0;
+  margin: 0 16px;
+  background: #8435ce;;
+}
+
+.asdf {
+  width: 300px;
+  min-height: 200px;
+  background: #8435ce;;
+}
 </style>
